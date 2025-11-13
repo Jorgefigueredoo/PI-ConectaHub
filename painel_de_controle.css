@@ -1,0 +1,302 @@
+.painel-de-controle {
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
+    width: 100%;
+    min-width: 1440px;
+    min-height: 1024px;
+    position: relative;
+}
+
+.painel-de-controle .rectangle {
+    position: absolute;
+    top: 223px;
+    left: 479px;
+    width: 124px;
+    height: 174px;
+    background-color: #0a2f66;
+    border-radius: 40px 10px 10px 40px;
+}
+
+.painel-de-controle .div {
+    position: absolute;
+    top: 222px;
+    left: 1174px;
+    width: 108px;
+    height: 174px;
+    background-color: #0a2f66;
+    border-radius: 40px 10px 10px 40px;
+    transform: rotate(180deg);
+}
+
+.painel-de-controle .text-wrapper {
+    position: absolute;
+    top: 67px;
+    left: 59px;
+    font-family: "Poppins-ExtraBold", Helvetica;
+    font-weight: 800;
+    color: #000000;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .text-wrapper-2 {
+    position: absolute;
+    top: 625px;
+    left: 343px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .text-wrapper-3 {
+    position: absolute;
+    top: 139px;
+    left: 75px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .rectangle-2 {
+    position: absolute;
+    top: 493px;
+    left: 298px;
+    width: 483px;
+    height: 100px;
+    background-color: #0a2f66;
+    border-radius: 40px;
+}
+
+.painel-de-controle .rectangle-3 {
+    position: absolute;
+    top: 705px;
+    left: 324px;
+    width: 962px;
+    height: 100px;
+    background-color: #ffedd0;
+    border-radius: 40px;
+}
+
+.painel-de-controle .p {
+    position: absolute;
+    top: 735px;
+    left: 373px;
+    font-family: "Inter-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .rectangle-4 {
+    position: absolute;
+    top: 837px;
+    left: 324px;
+    width: 962px;
+    height: 100px;
+    background-color: #ffedd0;
+    border-radius: 40px;
+}
+
+.painel-de-controle .rectangle-5 {
+    position: absolute;
+    top: 493px;
+    left: 844px;
+    width: 483px;
+    height: 100px;
+    background-color: #0a2f66;
+    border-radius: 40px;
+}
+
+.painel-de-controle .text-wrapper-4 {
+    position: absolute;
+    top: 516px;
+    left: 343px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .buscar-lote {
+    position: absolute;
+    top: 516px;
+    left: 917px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .alert-undefined {
+    position: absolute;
+    top: 46px;
+    left: 1315px;
+    width: 50px;
+    height: 50px;
+}
+
+.painel-de-controle .vector {
+    position: absolute;
+    width: 74.83%;
+    height: 81.27%;
+    top: 8.32%;
+    left: 12.60%;
+}
+
+.painel-de-controle .search-undefined {
+    position: absolute;
+    top: 523px;
+    left: 884px;
+    width: 40px;
+    height: 40px;
+}
+
+.painel-de-controle .img {
+    position: absolute;
+    width: 75.00%;
+    height: 75.00%;
+    top: 12.50%;
+    left: 12.50%;
+}
+
+.painel-de-controle .rectangle-6 {
+    position: absolute;
+    top: 227px;
+    left: 782px;
+    width: 204px;
+    height: 164px;
+    background-color: #ffedd0;
+    border-radius: 40px;
+}
+
+.painel-de-controle .rectangle-7 {
+    position: absolute;
+    top: 227px;
+    left: 1071px;
+    width: 204px;
+    height: 164px;
+    background-color: #ffedd0;
+    border-radius: 40px;
+}
+
+.painel-de-controle .text-wrapper-5 {
+    position: absolute;
+    top: 867px;
+    left: 373px;
+    font-family: "Inter-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .rectangle-8 {
+    position: absolute;
+    top: 227px;
+    left: 487px;
+    width: 204px;
+    height: 164px;
+    background-color: #ffedd0;
+    border-radius: 40px;
+}
+
+.painel-de-controle .text-wrapper-6 {
+    position: absolute;
+    top: 267px;
+    left: 544px;
+    width: 103px;
+    font-family: "Poppins-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 64px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .text-wrapper-7 {
+    position: absolute;
+    top: 272px;
+    left: 829px;
+    width: 103px;
+    font-family: "Poppins-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 64px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .text-wrapper-8 {
+    position: absolute;
+    top: 267px;
+    left: 1121px;
+    width: 138px;
+    font-family: "Poppins-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 64px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .text-wrapper-9 {
+    position: absolute;
+    top: 248px;
+    left: 526px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 22px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .text-wrapper-10 {
+    position: absolute;
+    top: 248px;
+    left: 807px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 22px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .text-wrapper-11 {
+    position: absolute;
+    top: 248px;
+    left: 1102px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 22px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.painel-de-controle .logotipo-para {
+    position: absolute;
+    top: 87px;
+    left: 499px;
+    width: 124px;
+    height: 43px;
+    aspect-ratio: 2.9;
+}
