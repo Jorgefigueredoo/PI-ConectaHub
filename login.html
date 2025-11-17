@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="login.css" />
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login ConectaHub</title>
+    
+    <link rel="stylesheet" href="login.css" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="login-container">
 
-    </head>
-    <body>
-        <div class="login">
-            <div class="ellipse"></div>
-            <img class="design-sem-nome" src="Design sem nome (2) 1.png" />
-            <div class="text-wrapper">E-mail:</div>
-            <div class="div">Senha:</div>
-            <div class="rectangle"></div>
-            <div class="text-wrapper-2">Login:</div>
-            <div class="rectangle-2"></div>
-            <div class="text-wrapper-3">ConectaHub</div>
-            <div class="rectangle-3"></div>
-            <div class="text-wrapper-4">Entrar</div>
-            <div class="rectangle-4"></div>
-            <div class="text-wrapper-5">Cadastre-se</div>
-            <img class="logotipo-para" src="Logotipo para Empresa de Tecnologia Simples Azul Preto-Photoroom 2.png" />
+        <div class="panel-illustracao">
+            <img src="Agricultor.png" alt="Ilustração de agricultores colhendo">
         </div>
-    </body>
+
+        <div class="panel-login-card">
+            
+            <img src="Logotipo para Empresa .png" alt="ConectaHub Logo" class="logo">
+            
+            <p class="login-title">Login:</p>
+            
+            <form>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email">
+                
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha">
+                
+                <button type="submit" class="btn-entrar">Entrar</button>
+                <button type="button" class="btn-cadastrar">Cadastre-se</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
 </html>

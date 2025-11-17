@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparar Envio - ConectaHub</title>
+    
+    <link rel="stylesheet" href="envios.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="app-container">
+        
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-logo"><span></span>ConectaHub</h1>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">🏠</span> 
+                        Painel
+                    </a>
+                </li>
+                <li class="nav-item active"> <a href="#">
+                        <span class="icon">🚚</span> 
+                        Envios
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">🔍</span> 
+                        Buscar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">📊</span> 
+                        Relatório
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">📦</span> 
+                        Estoque
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">⚙️</span> 
+                        Gestão
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <main class="main-content">
+            
+            <div class="form-card">
+                
+                <h2 class="form-title">Preparar Novo Envio</h2>
+                
+                <form>
+                    <section class="form-section">
+                        <h3>1. Destinatário</h3>
+                        <div class="input-group search-group">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" placeholder="Buscar agricultor por nome ou envio">
+                        </div>
+                        <p class="search-result">José da Silva // CPF: 145.789.774.12 // Gravatá – PE</p>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h2 class="form-title-section">Detalhes do Lote</h2>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="tipo-semente">Tipo de Semente</label>
+                                <select id="tipo-semente">
+                                    <option value="milho" selected>Milho</option>
+                                    <option value="soja">Soja</option>
+                                    <option value="feijao">Feijão</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="quantidade">Quantidade (Kg)</label>
+                                <select id="quantidade">
+                                    <option value="10" selected>10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <button type="submit" class="btn-submit">
+                        Gerar etiqueta e Registrar Envio
+                    </button>
+                </form>
+            </div>
+            
+        </main>
+    </div>
+
+    </body>
+</html>

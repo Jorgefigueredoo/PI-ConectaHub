@@ -1,37 +1,119 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="painel_de_controle.css" />
-    </head>
-    <body>
-        <div class="painel-de-controle">
-            <div class="rectangle"></div>
-            <div class="div"></div>
-            <div class="text-wrapper">Painel de controle</div>
-            <div class="text-wrapper-2">Atividade recente</div>
-            <div class="text-wrapper-3">Bem vindo, Dr Roberto</div>
-            <div class="rectangle-2"></div>
-            <div class="rectangle-3"></div>
-            <p class="p">Lote 7891 confirmado por José da Silva - Gravatá</p>
-            <div class="rectangle-4"></div>
-            <div class="rectangle-5"></div>
-            <div class="text-wrapper-4">+ Preparar novo envio</div>
-            <div class="buscar-lote">Buscar lote</div>
-            <div class="alert-undefined"><img class="vector" src="img/image.svg" /></div>
-            <div class="search-undefined"><img class="img" src="img/vector.svg" /></div>
-            <div class="rectangle-6"></div>
-            <div class="rectangle-7"></div>
-            <p class="text-wrapper-5">Novo envio criado Surubim 8790</p>
-            <div class="rectangle-8"></div>
-            <div class="text-wrapper-6">35</div>
-            <div class="text-wrapper-7">120</div>
-            <div class="text-wrapper-8">92%</div>
-            <div class="text-wrapper-9">Em Trânsito</div>
-            <div class="text-wrapper-10">Entregues hoje</div>
-            <div class="text-wrapper-11">Confirmados</div>
-            <img class="logotipo-para" src="img/logotipo-para-empresa-de-tecnologia-simples-azul-preto-photoroom-5.png" />
-        </div>
-    </body>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - ConectaHub</title>
+    
+    
+    <link rel="stylesheet" href="painel_de_controle.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="app-container">
+        
+        
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="logo-conectahub.png" alt="ConectaHub Logo" class="sidebar-logo">
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">🏠</span> 
+                        Painel
+                    </a>
+                </li>
+                <li class="nav-item active"> <a href="#">
+                        <span class="icon">🚚</span> 
+                        Envios
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">🔍</span> 
+                        Buscar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">📊</span> 
+                        Relatório
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">📦</span> 
+                        Estoque
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <span class="icon">⚙️</span> 
+                        Gestão
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <main class="main-content">
+            
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>
+                        <img src="logo-icon.png" alt="icon" class="title-icon">
+                        Painel de controle
+                    </h1>
+                    <p>Bem vindo, Dr Roberto</p>
+                </div>
+                <button class="notification-btn">
+                    <span>🔔</span>
+                </button>
+            </header>
+            
+            <section class="stats-cards">
+                <div class="stat-card">
+                    <span>Em Trânsito</span>
+                    <h2>35</h2>
+                </div>
+                <div class="stat-card">
+                    <span>Entregues hoje</span>
+                    <h2>120</h2>
+                </div>
+                <div class="stat-card">
+                    <span>Confirmados</span>
+                    <h2>92%</h2>
+                </div>
+            </section>
+            
+            <section class="main-actions">
+                <button class="btn btn-primary">
+                    <span class="icon">+</span>
+                    Preparar novo envio
+                </button>
+                <button class="btn btn-primary">
+                    <span class="icon">🔍</span>
+                    Buscar lote
+                </button>
+            </section>
+            
+            <section class="recent-activity">
+                <h2>Atividade recente</h2>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        Lote 7891 confirmado por José da Silva - Gravatá
+                    </div>
+                    <div class="activity-item">
+                        Novo envio criado Surubim 8790
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+
+</body>
 </html>
