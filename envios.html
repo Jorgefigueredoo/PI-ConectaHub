@@ -15,17 +15,18 @@
         
         <nav class="sidebar">
             <div class="sidebar-header">
-                <h1 class="sidebar-logo"><span></span>ConectaHub</h1>
+                <img src="Logotipo para Empresa .png" alt="ConectaHub Logo" class="sidebar-logo" style="max-width: 80%; height: auto;">
             </div>
             
             <ul class="sidebar-nav">
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="painel_de_controle.html">
                         <span class="icon">🏠</span> 
                         Painel
                     </a>
                 </li>
-                <li class="nav-item active"> <a href="#">
+                <li class="nav-item active"> 
+                    <a href="envios.html">
                         <span class="icon">🚚</span> 
                         Envios
                     </a>
@@ -68,7 +69,7 @@
                         <h3>1. Destinatário</h3>
                         <div class="input-group search-group">
                             <span class="search-icon">🔍</span>
-                            <input type="text" placeholder="Buscar agricultor por nome ou envio">
+                            <input type="text" id="agricultor-busca" placeholder="Buscar agricultor por nome ou envio">
                         </div>
                         <p class="search-result">José da Silva // CPF: 145.789.774.12 // Gravatá – PE</p>
                     </section>
@@ -79,7 +80,8 @@
                             <div class="input-group">
                                 <label for="tipo-semente">Tipo de Semente</label>
                                 <select id="tipo-semente">
-                                    <option value="milho" selected>Milho</option>
+                                    <option value="">Selecione...</option>
+                                    <option value="milho">Milho</option>
                                     <option value="soja">Soja</option>
                                     <option value="feijao">Feijão</option>
                                 </select>
@@ -87,7 +89,8 @@
                             <div class="input-group">
                                 <label for="quantidade">Quantidade (Kg)</label>
                                 <select id="quantidade">
-                                    <option value="10" selected>10</option>
+                                    <option value="">Selecione...</option>
+                                    <option value="10">10</option>
                                     <option value="20">20</option>
                                     <option value="50">50</option>
                                 </select>
@@ -95,7 +98,7 @@
                         </div>
                     </section>
                     
-                    <button type="submit" class="btn-submit">
+                    <button type="submit" class="btn-registrar">
                         Gerar etiqueta e Registrar Envio
                     </button>
                 </form>
@@ -104,5 +107,6 @@
         </main>
     </div>
 
-    </body>
+    <script src="js/envios.js"></script>
+</body>
 </html>
