@@ -1,0 +1,192 @@
+/* --- 1. Configurações Globais --- */
+body {
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f0f2f5; 
+    color: #333;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- 2. Barra Lateral (Sidebar) --- */
+/* (Estes estilos são do código anterior e continuam os mesmos) */
+.sidebar {
+    width: 260px;
+    background-color: #1a3a68; 
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+.sidebar-header {
+    margin-bottom: 40px;
+    text-align: center; 
+}
+.sidebar-logo-img {
+    width: 180px; 
+    height: auto; 
+}
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1; 
+}
+.nav-item a {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: #a9b4c9; 
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+.nav-item a .icon {
+    font-size: 18px; 
+    width: 20px; 
+    text-align: center; 
+    margin-right: 15px;
+    opacity: 0.8; 
+}
+.nav-item a:hover {
+    background-color: #3a5a8a;
+    color: #ffffff;
+}
+/* Regra para o item ativo (Estoque) */
+.nav-item.active a {
+    background-color: #3a5a8a; 
+    color: #ffffff;
+    font-weight: 600;
+}
+.nav-item.active a .icon {
+    opacity: 1.0;
+}
+
+/* --- 3. Conteúdo Principal (ATUALIZADO) --- */
+/* Remove o layout 'grid' (se você o copiou da tela de Relatórios)
+  e usa 'flex' para centralizar o novo card.
+*/
+.main-content {
+    flex: 1; 
+    padding: 40px 50px;
+    overflow-y: auto; 
+    background-color: #f0f2f5; 
+    
+    /* Centraliza o card de estoque */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+}
+
+/* --- 4. Cartão de Controle de Estoque (NOVO) --- */
+.stock-control-card {
+    background-color: #1a3a68; /* Fundo azul escuro */
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1200px; /* Largura máxima do card */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card-title-dark {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff; /* Título branco */
+    margin: 0 0 25px 0;
+}
+
+.stock-search h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #a9b4c9; /* Texto "1. Destinatário" cinza-azulado */
+    margin: 0 0 15px 0;
+}
+
+/* Barra de busca dentro do card azul */
+.search-bar-dark {
+    display: flex;
+    align-items: center;
+    background-color: #3a5a8a; /* Fundo cinza-azulado */
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 40px;
+}
+.search-bar-dark .icon {
+    font-size: 16px;
+    color: #a9b4c9; /* Ícone cinza-azulado */
+    margin-right: 12px;
+}
+.search-bar-dark input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 16px; 
+    font-weight: 500;
+    color: #ffffff; /* Texto branco */
+}
+.search-bar-dark input::placeholder {
+    color: #a9b4c9;
+    font-weight: 500;
+}
+
+/* --- 5. Tabela de Estoque (NOVO) --- */
+.stock-table-section {
+    margin-top: 30px;
+}
+.stock-table {
+    width: 100%;
+    /* Truque para ter espaço entre as linhas */
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
+}
+
+.stock-table th {
+    text-align: left;
+    padding: 10px 15px;
+    color: #a9b4c9; /* Cabeçalho cinza-azulado */
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.stock-table td {
+    background-color: #f0f2f5; /* Fundo cinza claro das linhas */
+    color: #333; /* Texto escuro dentro das linhas */
+    padding: 20px 15px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Arredonda os cantos da primeira e última célula de cada linha */
+.stock-table td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.stock-table td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* -- Classes de Status -- */
+.status {
+    font-weight: 700;
+    font-size: 15px;
+}
+.status-disponivel {
+    color: #28a745; /* Verde */
+}
+.status-baixo {
+    color: #ffc107; /* Amarelo */
+}
+.status-sem-estoque {
+    color: #dc3545; /* Vermelho */
+}

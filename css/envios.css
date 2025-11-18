@@ -2,9 +2,11 @@
 body {
     margin: 0;
     font-family: 'Poppins', Arial, sans-serif;
+    /* Fundo cinza bem claro (como na imagem) */
     background-color: #f0f2f5; 
     color: #333;
 }
+
 .app-container {
     display: flex;
     min-height: 100vh;
@@ -21,8 +23,9 @@ body {
 }
 .sidebar-header {
     margin-bottom: 40px;
-    text-align: center;
+    text-align: center; 
 }
+/* Logo como texto */
 .sidebar-logo {
     font-size: 24px;
     font-weight: 600;
@@ -58,21 +61,18 @@ body {
     margin-bottom: 10px;
     transition: all 0.3s ease;
 }
-
-/* ATUALIZADO: 
-  Este CSS agora estiliza o <span> que contém o emoji.
-*/
 .nav-item a .icon {
-    font-size: 18px; /* Controla o tamanho do emoji */
+    font-size: 18px; 
     width: 20px; 
     text-align: center; 
     margin-right: 15px;
-    opacity: 0.8;
+    opacity: 0.8; 
 }
 .nav-item a:hover {
     background-color: #3a5a8a;
     color: #ffffff;
 }
+/* Regra para o item ativo (Envios) */
 .nav-item.active a {
     background-color: #3a5a8a; 
     color: #ffffff;
@@ -88,49 +88,59 @@ body {
     padding: 40px 50px;
     overflow-y: auto; 
     background-color: #f0f2f5; 
+    /* Centraliza o card */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-/* --- 4. Cartão do Formulário --- */
-.form-card {
-    background-color: #e9e9f0; 
-    border-radius: 30px; 
-    padding: 50px;
+/* --- 4. Cartão do Formulário (Estilo Branco) --- */
+.form-card-white {
+    background-color: #ffffff; /* Fundo branco */
+    border-radius: 20px; /* Bordas bem arredondadas */
+    padding: 40px 50px;
+    width: 100%;
     max-width: 900px; 
     margin: 20px auto; 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
+
 .form-title {
     font-size: 28px;
     font-weight: 700;
     color: #222;
     margin: 0 0 30px 0;
 }
+
 .form-title-section {
     font-size: 24px;
     font-weight: 700;
     color: #222;
     margin: 0 0 20px 0;
 }
+
 .form-section {
     margin-bottom: 35px;
 }
+
 .form-section h3 { 
     font-size: 18px;
     font-weight: 500;
     color: #444;
     margin: 0 0 15px 0;
 }
+
 .form-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
     gap: 25px;
 }
-.form-row .input-group {
-    flex: 1;
-}
+
 .input-group {
     width: 100%;
     box-sizing: border-box;
 }
+
 .input-group label {
     display: block;
     font-size: 15px;
@@ -138,7 +148,10 @@ body {
     color: #333;
     margin-bottom: 8px;
 }
+
+/* Estilo dos campos de formulário (cinza claro) */
 .input-group input[type="text"],
+.input-group input[type="number"],
 .input-group select {
     width: 100%;
     padding: 14px 18px;
@@ -146,9 +159,13 @@ body {
     font-family: 'Poppins', Arial, sans-serif;
     border: none; 
     border-radius: 10px;
-    background-color: #d8d8e0; 
+    background-color: #f0f2f5; /* Fundo cinza claro */
     color: #333;
     box-sizing: border-box; 
+}
+
+/* Estilo para <select> ficar igual ao <input> */
+.input-group select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -159,20 +176,22 @@ body {
     padding-right: 45px; 
 }
 
-/* ATUALIZADO: Estiliza o emoji de busca */
+/* Campo de busca */
 .search-group {
     position: relative;
 }
+
 .search-group .search-icon {
     position: absolute;
     left: 18px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 16px; /* Tamanho do emoji */
+    font-size: 18px;
     color: #555;
 }
+
 .search-group input[type="text"] {
-    padding-left: 50px; /* Espaço para o emoji */
+    padding-left: 50px; 
 }
 
 .search-result {
@@ -180,6 +199,8 @@ body {
     color: #555;
     margin: 10px 0 0 5px;
 }
+
+/* Botão de Envio (Azul escuro) */
 .btn-submit {
     width: 100%;
     padding: 18px;
@@ -193,6 +214,7 @@ body {
     transition: background-color 0.3s ease;
     margin-top: 10px; 
 }
+
 .btn-submit:hover {
     background-color: #3a5a8a;
 }

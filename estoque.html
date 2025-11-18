@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque - ConectaHub</title>
+    
+    <link rel="stylesheet" href="css/estoque.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="app-container">
+        
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="Logotipo para Empresa .png" alt="Logo da ConectaHub" class="sidebar-logo-img">
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-home icon"></i> 
+                        Painel
+                    </a>
+                </li>
+                <li class="nav-item"> 
+                    <a href="#">
+                        <i class="fas fa-truck icon"></i> 
+                        Envios
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-search icon"></i> 
+                        Buscar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-chart-pie icon"></i> 
+                        Relatório
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="#">
+                        <i class="fas fa-box icon"></i> 
+                        Estoque
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-cog icon"></i> 
+                        Gestão
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <main class="main-content">
+            
+            <div class="stock-control-card">
+                
+                <h2 class="card-title-dark">Controle de Estoque</h2>
+                
+                <section class="stock-search">
+                    <h3>1. Destinatário</h3>
+                    <div class="search-bar-dark">
+                        <i class="fas fa-search icon"></i>
+                        <input type="text" placeholder="Buscar por semente ou lote">
+                    </div>
+                </section>
+                
+                <section class="stock-table-section">
+                    <h2 class="card-title-dark">Estoque Atual</h2>
+                    
+                    <table class="stock-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Semente</th>
+                                <th>Quantidade Disponível (kg)</th>
+                                <th>Status</th>
+                                <th>Última Entrada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Milho</td>
+                                <td>1.500 kg</td>
+                                <td><span class="status status-disponivel">Disponível</span></td>
+                                <td>25/10/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Soja</td>
+                                <td>800 kg</td>
+                                <td><span class="status status-disponivel">Disponível</span></td>
+                                <td>11/08/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Feijão</td>
+                                <td>50 kg</td>
+                                <td><span class="status status-baixo">Estoque Baixo</span></td>
+                                <td>09/09/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Melancia</td>
+                                <td>0 kg</td>
+                                <td><span class="status status-sem-estoque">Sem Estoque</span></td>
+                                <td>22/08/2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                
+            </div>
+            
+        </main>
+    </div>
+
+</body>
+</html>
