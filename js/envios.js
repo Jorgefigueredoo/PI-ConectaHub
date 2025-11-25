@@ -1,47 +1,40 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- LÓGICA DA BARRA LATERAL (SIDEBAR) ---
+    
+    // 1. Pega o nome do arquivo atual (ex: "envios.html")
+    const pagAtual = window.location.pathname.split("/").pop();
 
-    // --- 1. SELETORES ---
-    // Pegamos os elementos pelos IDs (vamos configurar no HTML jaja)
-    const btnRegistrar = document.querySelector('.btn-registrar');
-    const inputAgricultor = document.getElementById('agricultor-busca');
-    const selectSemente = document.getElementById('tipo-semente');
-    const selectQuantidade = document.getElementById('quantidade');
+    // 2. Seleciona todos os links do menu
+    const menuItems = document.querySelectorAll('.menu-item');
 
-    // --- 2. AÇÃO DO BOTÃO REGISTRAR ---
-    if (btnRegistrar) {
-        btnRegistrar.addEventListener('click', function(event) {
-            event.preventDefault(); // Evita recarregar a página
+    // 3. Verifica cada link
+    menuItems.forEach(item => {
+        // Pega o destino do link (o href)
+        const linkDestino = item.getAttribute('href');
 
-            // Validação Básica
-            // Verifica se os campos foram "selecionados" (simulação)
-            
-            // Pega os valores (caso existam)
-            const agricultor = inputAgricultor ? inputAgricultor.value : "Agricultor Teste";
-            const semente = selectSemente ? selectSemente.value : "";
-            const qtd = selectQuantidade ? selectQuantidade.value : "";
+        // Se o link for igual à página atual, adiciona a classe "active"
+        if (linkDestino === pagAtual) {
+            item.classList.add('active');
+        } else {
+            // Garante que os outros não tenham a classe (segurança)
+            item.classList.remove('active');
+        }
+    });
 
-            // Se o usuário não selecionou semente ou quantidade (assumindo valor vazio como padrão)
-            if (semente === "" || qtd === "") {
-                alert("⚠️ Por favor, selecione o Tipo de Semente e a Quantidade.");
-                return;
+    // --- LÓGICA ESPECIAL PARA O BOTÃO "BUSCAR" ---
+    const btnBuscar = document.getElementById('btn-buscar');
+    if (btnBuscar) {
+        btnBuscar.addEventListener('click', function(e) {
+            e.preventDefault(); // Não muda de página
+            // Foca no input de busca se ele existir na página
+            const inputBusca = document.querySelector('input[type="search"]') || document.getElementById('agricultor-busca');
+            if (inputBusca) {
+                inputBusca.focus();
+                inputBusca.style.boxShadow = "0 0 10px rgba(0,0,255, 0.5)"; // Efeito visual
+            } else {
+                alert("Funcionalidade de busca global em desenvolvimento!");
             }
-
-            // Feedback Visual (Simulando processamento)
-            btnRegistrar.innerText = "Gerando etiqueta...";
-            btnRegistrar.style.backgroundColor = "#2ecc71"; // Verde temporário
-
-            setTimeout(function() {
-                // Mensagem de Sucesso
-                alert(`✅ SUCESSO!\n\nEnvio registrado para: José da Silva\nSemente: ${semente}\nQuantidade: ${qtd}kg\n\nA etiqueta foi enviada para impressão.`);
-                
-                // Reseta o botão
-                btnRegistrar.innerText = "Gerar etiqueta e Registrar Envio";
-                btnRegistrar.style.backgroundColor = ""; // Volta a cor original
-                
-                // Opcional: Redirecionar de volta para o painel após o sucesso
-                // window.location.href = "painel_de_controle.html";
-
-            }, 1500); // Espera 1,5 segundos para parecer real
         });
     }
 });

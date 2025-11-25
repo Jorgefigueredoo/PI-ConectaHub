@@ -2,7 +2,6 @@
 body {
     margin: 0;
     font-family: 'Poppins', Arial, sans-serif;
-    /* Fundo cinza bem claro (como na imagem) */
     background-color: #f0f2f5; 
     color: #333;
 }
@@ -12,7 +11,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- 2. Barra Lateral (Sidebar) --- */
+/* --- 2. Barra Lateral (Sidebar - ATUALIZADA) --- */
 .sidebar {
     width: 260px;
     background-color: #1a3a68; 
@@ -21,64 +20,69 @@ body {
     flex-direction: column;
     flex-shrink: 0;
 }
+
 .sidebar-header {
     margin-bottom: 40px;
     text-align: center; 
 }
-/* Logo como texto */
+
+/* Logo */
 .sidebar-logo {
+    max-width: 100%;
+    height: auto;
+    /* Caso use texto em vez de imagem, mantenha as regras abaixo */
     font-size: 24px;
     font-weight: 600;
     color: #ffffff;
-    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.sidebar-logo span {
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    background-color: #3a5a8a; 
-    border-radius: 8px;
-    margin-right: 12px;
+
+/* Container dos itens do menu */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Espaço entre os botões */
+    flex: 1;
 }
-.sidebar-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    flex: 1; 
-}
-.nav-item a {
+
+/* Estilo do Botão do Menu (.menu-item) */
+.menu-item {
     display: flex;
     align-items: center;
-    padding: 16px;
+    padding: 14px 18px; /* Espaçamento interno */
     border-radius: 10px;
     text-decoration: none;
     font-weight: 500;
     font-size: 16px;
-    color: #a9b4c9; 
-    margin-bottom: 10px;
+    color: #a9b4c9; /* Cor do texto inativo */
     transition: all 0.3s ease;
 }
-.nav-item a .icon {
+
+.menu-item .icon {
     font-size: 18px; 
-    width: 20px; 
+    width: 24px; 
     text-align: center; 
-    margin-right: 15px;
+    margin-right: 12px;
     opacity: 0.8; 
 }
-.nav-item a:hover {
-    background-color: #3a5a8a;
+
+/* Efeito ao passar o mouse */
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
 }
-/* Regra para o item ativo (Envios) */
-.nav-item.active a {
-    background-color: #3a5a8a; 
+
+/* --- ESTADO ATIVO (Quando a página está aberta) --- */
+.menu-item.active {
+    background-color: #3a5a8a; /* Azul mais claro */
     color: #ffffff;
     font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
-.nav-item.active a .icon {
+
+.menu-item.active .icon {
     opacity: 1.0;
 }
 
@@ -88,7 +92,6 @@ body {
     padding: 40px 50px;
     overflow-y: auto; 
     background-color: #f0f2f5; 
-    /* Centraliza o card */
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -96,8 +99,8 @@ body {
 
 /* --- 4. Cartão do Formulário (Estilo Branco) --- */
 .form-card-white {
-    background-color: #ffffff; /* Fundo branco */
-    border-radius: 20px; /* Bordas bem arredondadas */
+    background-color: #ffffff;
+    border-radius: 20px;
     padding: 40px 50px;
     width: 100%;
     max-width: 900px; 
@@ -113,26 +116,19 @@ body {
 }
 
 .form-title-section {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     color: #222;
-    margin: 0 0 20px 0;
+    margin-bottom: 15px;
 }
 
 .form-section {
     margin-bottom: 35px;
 }
 
-.form-section h3 { 
-    font-size: 18px;
-    font-weight: 500;
-    color: #444;
-    margin: 0 0 15px 0;
-}
-
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
+    grid-template-columns: 1fr 1fr; /* Duas colunas */
     gap: 25px;
 }
 
@@ -149,7 +145,7 @@ body {
     margin-bottom: 8px;
 }
 
-/* Estilo dos campos de formulário (cinza claro) */
+/* Inputs e Selects */
 .input-group input[type="text"],
 .input-group input[type="number"],
 .input-group select {
@@ -159,12 +155,19 @@ body {
     font-family: 'Poppins', Arial, sans-serif;
     border: none; 
     border-radius: 10px;
-    background-color: #f0f2f5; /* Fundo cinza claro */
+    background-color: #f0f2f5; /* Fundo cinza claro nos campos */
     color: #333;
     box-sizing: border-box; 
+    outline: none;
+    transition: box-shadow 0.2s;
 }
 
-/* Estilo para <select> ficar igual ao <input> */
+.input-group input:focus,
+.input-group select:focus {
+    box-shadow: 0 0 0 2px #3a5a8a; /* Foco azul */
+}
+
+/* Estilo personalizado para o Select */
 .input-group select {
     appearance: none;
     -webkit-appearance: none;
@@ -172,11 +175,11 @@ body {
     background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%207.5l5%205%205-5%22%20stroke%3D%22%23555%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
     background-position: right 15px center;
-    background-size: 20px;
-    padding-right: 45px; 
+    background-size: 16px;
+    cursor: pointer;
 }
 
-/* Campo de busca */
+/* Campo de busca com ícone interno */
 .search-group {
     position: relative;
 }
@@ -185,9 +188,10 @@ body {
     position: absolute;
     left: 18px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); /* Centraliza verticalmente */
     font-size: 18px;
-    color: #555;
+    color: #777;
+    pointer-events: none; /* Permite clicar através do ícone */
 }
 
 .search-group input[type="text"] {
@@ -195,26 +199,31 @@ body {
 }
 
 .search-result {
-    font-size: 14px;
-    color: #555;
-    margin: 10px 0 0 5px;
+    font-size: 13px;
+    color: #666;
+    margin-top: 8px;
+    margin-left: 5px;
 }
 
-/* Botão de Envio (Azul escuro) */
+/* Botão de Registrar (Verde/Azul) */
 .btn-submit {
     width: 100%;
     padding: 18px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     background-color: #1a3a68;
     color: white;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.1s;
     margin-top: 10px; 
 }
 
 .btn-submit:hover {
-    background-color: #3a5a8a;
+    background-color: #2c4c7c;
+}
+
+.btn-submit:active {
+    transform: scale(0.98);
 }
