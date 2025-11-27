@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConectaHub - Cadastro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        body {
+            background-color: #1a3a68; /* Azul escuro do fundo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            display: flex;
+            width: 900px;
+            height: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Lado Esquerdo (Imagem) */
+        .imagem-lateral {
+            width: 50%;
+            background-color: #f0f4f8; /* Cor de fundo da imagem */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .imagem-lateral img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        /* Lado Direito (Formulário) */
+        .formulario {
+            width: 50%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            color: #1a3a68;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        h2 { margin-bottom: 20px; color: #333; }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #1a3a68;
+            background-color: #fff;
+        }
+
+        .btn-cadastrar {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a3a68;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-cadastrar:hover { background-color: #132b4d; }
+        .btn-cadastrar:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #1a3a68;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="imagem-lateral">
+            <img src="assets/agricultores.png" alt="Ilustração ConectaHub" onerror="this.style.display='none'">
+        </div>
+
+        <div class="formulario">
+            <div class="logo">
+                ☁️ ConectaHub
+            </div>
+
+            <h2>Crie sua conta</h2>
+            <p style="margin-bottom: 20px; color: #666;">Preencha seus dados para começar.</p>
+
+            <form id="form-cadastro">
+                <div class="campo">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" placeholder="Ex: João da Silva" required>
+                </div>
+
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="••••••" required>
+                </div>
+
+                <button type="submit" class="btn-cadastrar">Cadastrar</button>
+            </form>
+
+            <div class="login-link">
+                Já tem uma conta? <a href="login.html">Fazer Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script> 
+    <script src="js/cadastro.js"></script>
+
+</body>
+</html>
