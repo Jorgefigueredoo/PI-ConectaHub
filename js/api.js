@@ -47,6 +47,42 @@ async function fazerLogin(email, senha) {
     }
 }
 
+// ✅ FUNÇÃO DE CADASTRO CORRIGIDA
+async function fazerCadastro(nome, email, senha) {
+    try {
+        const response = await fetch(`${API_URL}/auth/register`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({ 
+                name: nome,
+                login: email,
+                password: senha,
+                role: "USER"
+            })
+        });
+
+        // ✅ Apenas verifica o status - NÃO tenta ler o body
+        if (response.ok) {
+            return { success: true };
+        }
+
+        // ❌ Se deu erro, retorna mensagem genérica
+        return { 
+            success: false, 
+            error: 'Não foi possível criar a conta. Tente novamente.' 
+        };
+
+    } catch (error) {
+        console.error('Erro no cadastro:', error);
+        return { 
+            success: false, 
+            error: 'Erro de conexão com o servidor' 
+        };
+    }
+}
+
 // ========================================
 // 2. FUNÇÕES DE FORNECEDORES (CRUD COMPLETO)
 // ========================================
@@ -65,7 +101,7 @@ async function listarFornecedores() {
     }
 }
 
-// Cria um novo fornecedor (A função que estava faltando!)
+// Cria um novo fornecedor
 async function criarFornecedor(razaoSocial, cnpj) {
     try {
         const response = await fetch(`${API_URL}/fornecedores`, {

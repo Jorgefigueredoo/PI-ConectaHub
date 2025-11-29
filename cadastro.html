@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConectaHub - Cadastro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         
@@ -125,7 +126,7 @@
 
     <div class="container">
         <div class="imagem-lateral">
-            <img src="assets/agricultores.png" alt="Ilustração ConectaHub" onerror="this.style.display='none'">
+            <img src="Agricultor.png" alt="Ilustração ConectaHub" onerror="this.style.display='none'">
         </div>
 
         <div class="formulario">
@@ -154,6 +155,9 @@
 
                 <button type="submit" class="btn-cadastrar">Cadastrar</button>
             </form>
+                
+            <!-- Adicionado espaço para mensagem de erro -->
+            <div id="msg-erro" style="color: red; text-align: center; margin-top: 10px; font-size: 14px; display: none;"></div>
 
             <div class="login-link">
                 Já tem uma conta? <a href="login.html">Fazer Login</a>
@@ -161,8 +165,9 @@
         </div>
     </div>
 
+    <!-- ORDEM CORRIGIDA: api.js primeiro! -->
     <script src="js/api.js"></script> 
     <script src="js/cadastro.js"></script>
-
+    
 </body>
 </html>

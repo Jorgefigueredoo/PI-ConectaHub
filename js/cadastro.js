@@ -11,8 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('email').value.trim();
             const senha = document.getElementById('senha').value;
 
+            // Validações
+            if (!nome || !email || !senha) {
+                alert('❌ Preencha todos os campos!');
+                return;
+            }
+
             if (senha.length < 3) {
-                alert('A senha é muito curta!');
+                alert('❌ A senha precisa ter pelo menos 3 caracteres!');
                 return;
             }
 
