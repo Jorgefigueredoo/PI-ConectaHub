@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estoque - ConectaHub</title>
     
+    <!-- CSS Específico da página -->
     <link rel="stylesheet" href="css/estoque.css">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CSS Global da Sidebar (Para garantir o padrão) -->
+    <link rel="stylesheet" href="css/sidebar.css">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -18,8 +21,9 @@
         <!-- SIDEBAR -->
         <nav class="sidebar">
             <div class="sidebar-header">
-                <!-- Fallback de imagem -->
-                <img src="img/logo_conectahub.png" alt="Logo da ConectaHub" class="sidebar-logo-img" onerror="this.src='https://placehold.co/150x50?text=Logo'">
+                <!-- CORREÇÃO: Removido o style="..." para usar o tamanho do CSS (140px) -->
+                <img src="logo_conectahub_branco.png" alt="ConectaHub" class="sidebar-logo" 
+                     onerror="this.src='https://placehold.co/180x60/1a3a68/FFF?text=ConectaHub'">
             </div>
             
             <ul class="sidebar-nav">
@@ -80,7 +84,6 @@
                     <h3>1. Destinatário</h3>
                     <div class="search-bar-dark">
                         <i class="fas fa-search icon"></i>
-                        <!-- ID adicionado para o script de busca -->
                         <input type="text" id="input-busca" placeholder="Buscar por semente ou lote">
                     </div>
                 </section>
@@ -97,9 +100,7 @@
                                 <th>Última Entrada</th>
                             </tr>
                         </thead>
-                        <!-- ID adicionado para o Javascript preencher dinamicamente -->
                         <tbody id="tabela-estoque-body">
-                            <!-- O JS vai limpar isso e adicionar os dados reais -->
                             <tr>
                                 <td colspan="4" style="text-align: center; padding: 20px;">Carregando estoque...</td>
                             </tr>

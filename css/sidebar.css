@@ -1,0 +1,98 @@
+/* =========================================
+   ESTILO UNIFICADO DA SIDEBAR (MENU LATERAL)
+   ========================================= */
+
+/* Container da Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: #132a4e; /* Azul escuro igual da imagem */
+    padding: 40px 20px; /* Mais espaço no topo */
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 100vh; /* Ocupa a altura toda */
+    box-sizing: border-box;
+    position: fixed; /* Fixa na esquerda */
+    left: 0;
+    top: 0;
+}
+
+/* Ajuste para o conteúdo não ficar atrás da sidebar fixa */
+.main-content {
+    margin-left: 260px; /* Mesma largura da sidebar */
+    width: calc(100% - 260px);
+}
+
+/* Cabeçalho com Logo */
+.sidebar-header {
+    margin-bottom: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-logo {
+    width: 140px; /* Tamanho ajustado */
+    height: auto;
+    display: block;
+}
+
+/* Lista de Navegação */
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espaço entre os botões */
+    flex: 1; /* Ocupa o espaço disponível para empurrar o Sair */
+}
+
+/* Itens do Menu (Links) */
+.nav-item a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    border-radius: 12px; /* Cantos arredondados */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: #aeb9cc; /* Cor do texto inativo (cinza azulado) */
+    transition: all 0.3s ease;
+}
+
+/* Ícones */
+.nav-item a i {
+    font-size: 18px; 
+    width: 24px; 
+    text-align: center; 
+    margin-right: 15px;
+}
+
+/* Efeito Hover (Passar o mouse) */
+.nav-item a:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --- ESTADO ATIVO (Botão selecionado) --- */
+.nav-item.active a {
+    background-color: #3b5987; /* Azul mais claro do item ativo */
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Sombra suave */
+}
+
+/* Botão Sair (Logout) */
+.logout-item {
+    margin-top: auto; /* Empurra para o final da sidebar se sobrar espaço */
+}
+
+.logout-item a {
+    color: #aeb9cc;
+}
+
+.logout-item a:hover {
+    color: #ff6b6b; /* Vermelho suave ao passar o mouse */
+    background-color: rgba(255, 107, 107, 0.1);
+}
