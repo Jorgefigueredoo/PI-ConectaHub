@@ -225,11 +225,11 @@ Certifique-se de que os arquivos de imagem (`Agricultor.png`, `logo_conectahub_b
 Projeto desenvolvido como trabalho acadêmico integrador.
 
 Equipe:
-Jorge Antonio
-Lucas Souza
-Luiz Eduardo
-Kauan Nicolas
-Matheus Paulo
+Jorge Antonio,
+Lucas Souza,
+Luiz Eduardo,
+Kauan Nicolas,
+Matheus Paulo e 
 Vínicius Trezena
 
 ## 📄 Licença
