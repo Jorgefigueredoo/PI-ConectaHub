@@ -5,11 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatórios - ConectaHub</title>
     
-    <link rel="stylesheet" href="css/relatorio.css">
-    
+    <link rel="stylesheet" href="css/gestao.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .report-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #444; }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box; 
+        }
+        .btn-gerar {
+            width: 100%;
+            padding: 15px;
+            background-color: #1a3a68;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .btn-gerar:hover { background-color: #254e8a; }
+    </style>
 </head>
 <body>
     
@@ -17,101 +49,74 @@
         
         <nav class="sidebar">
             <div class="sidebar-header">
-                <h1 class="sidebar-logo"><span></span>ConectaHub</h1>
+                <!-- Ajuste o nome da imagem conforme o seu arquivo real -->
+                <img src="img/logo_conectahub.png" alt="ConectaHub Logo" class="sidebar-logo" onerror="this.src='https://placehold.co/150x50?text=Logo'">
             </div>
             
             <ul class="sidebar-nav">
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-home icon"></i> 
-                        Painel
-                    </a>
-                </li>
-                <li class="nav-item"> 
-                    <a href="#">
-                        <i class="fas fa-truck icon"></i> 
-                        Envios
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-search icon"></i> 
-                        Buscar
-                    </a>
-                </li>
-                <li class="nav-item active">
-                    <a href="#">
-                        <i class="fas fa-chart-pie icon"></i> 
-                        Relatório
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-box icon"></i> 
-                        Estoque
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-cog icon"></i> 
-                        Gestão
-                    </a>
+                <li class="nav-item"><a href="painel_de_controle.html"><i class="fas fa-home icon"></i> Painel</a></li>
+                <li class="nav-item"><a href="envios.html"><i class="fas fa-truck icon"></i> Envios</a></li>
+                <li class="nav-item"><a href="buscar.html"><i class="fas fa-search icon"></i> Buscar</a></li>
+                <li class="nav-item active"><a href="relatorio.html"><i class="fas fa-chart-pie icon"></i> Relatório</a></li>
+                <li class="nav-item"><a href="estoque.html"><i class="fas fa-box icon"></i> Estoque</a></li>
+                <li class="nav-item"><a href="gestao.html"><i class="fas fa-cog icon"></i> Gestão</a></li>
+                <li class="nav-item logout-item" style="margin-top: auto;">
+                    <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt icon"></i> Sair</a>
                 </li>
             </ul>
         </nav>
         
         <main class="main-content">
+            <div class="management-header">
+                <h2 class="main-title">Gerador de relatórios internos</h2>
+            </div>
             
-            <div class="report-generator-card">
+            <div class="report-card">
+                <h3 style="margin-top: 0; color: #666; font-weight: 500; margin-bottom: 20px;">Gerar relatório de desempenho</h3>
                 
-                <h2 class="card-title">Gerador de relatórios internos</h2>
-                
-                <form class="report-form">
-                    <h3>Gerar relatório de desempenho</h3>
-                    <div class="input-group">
-                        <input type="text" placeholder="Cliente">
+                <form id="form-relatorio">
+                    <div class="form-group">
+                        <label>Cliente (Opcional)</label>
+                        <input type="text" id="filtro-cliente" placeholder="Nome do agricultor">
                     </div>
-                    <div class="input-group">
-                        <input type="text" placeholder="Período (De: xx/xx/xxxx Até: xx/xx/xxxx)">
+
+                    <div class="form-group">
+                        <label>Período (De: / Até:)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="date" id="filtro-data-inicio">
+                            <input type="date" id="filtro-data-fim">
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <input type="text" placeholder="Município">
+
+                    <div class="form-group">
+                        <label>Município</label>
+                        <input type="text" id="filtro-municipio" placeholder="Ex: Gravatá">
                     </div>
-                    <div class="input-group">
-                        <input type="text" placeholder="Tipo da Semente">
+
+                    <div class="form-group">
+                        <label>Tipo de Semente</label>
+                        <input type="text" id="filtro-semente" placeholder="Ex: Milho">
                     </div>
-                    
-                    <button type="submit" class="btn-outline">
+
+                    <button type="submit" class="btn-gerar" id="btn-gerar-pdf">
                         Gerar relatório (PDF)
                     </button>
                 </form>
             </div>
-            
-            <div class="comms-panel-card">
-                
-                <h2 class="card-title">Comunicação e Transparência</h2>
-                
-                <div class="form-group">
-                    <label>Mural de avisos do agricultor</label>
-                    <textarea placeholder="Nova aviso...."></textarea>
-                </div>
-                
-                <div class="portal-section">
-                    <h3>Portal da Transparência</h3>
-                    <p>Atualize dados que serão exibidos publicamente</p>
-                    <button type="button" class="btn-primary">
-                        Atualizar Painel Público
-                    </button>
-                </div>
-                
-            </div>
-            
         </main>
     </div>
-</main>
-    </div>
 
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
     <script src="js/relatorio.js"></script>
+    
+    <script>
+        function logout() {
+            localStorage.removeItem("token");
+            localStorage.removeItem("usuario");
+            window.location.href = "login.html"; 
+        }
+    </script>
 
 </body>
 </html>

@@ -1,58 +1,82 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- FUNCIONALIDADE 1: Gerar Relatório ---
-    const btnGerar = document.querySelector('.btn-outline');
-    const inputs = document.querySelectorAll('.report-form input');
-
-    // Quando clicar no botão "Gerar Relatório"
-    if(btnGerar) {
-        btnGerar.addEventListener('click', function(event) {
-            event.preventDefault(); // Impede a página de recarregar sozinha
-
-            // 1. Verifica se todos os campos estão preenchidos
-            let estaTudoPreenchido = true;
-            inputs.forEach(function(input) {
-                if (input.value.trim() === "") {
-                    estaTudoPreenchido = false;
-                }
-            });
-
-            // 2. Se faltar algo, avisa. Se estiver tudo ok, "gera" o PDF.
-            if (!estaTudoPreenchido) {
-                alert("Por favor, preencha todos os campos antes de gerar o relatório.");
-            } else {
-                // Muda o texto do botão para parecer que está carregando
-                const textoOriginal = btnGerar.textContent;
-                btnGerar.textContent = "Processando...";
-                btnGerar.style.opacity = "0.7";
-
-                // Espera 1.5 segundos e mostra sucesso
-                setTimeout(function() {
-                    alert("Sucesso! O relatório PDF foi gerado e baixado para seu computador.");
-                    
-                    // Volta o botão ao normal e limpa os campos
-                    btnGerar.textContent = textoOriginal;
-                    btnGerar.style.opacity = "1";
-                    inputs.forEach(input => input.value = ""); 
-                }, 1500);
-            }
-        });
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Proteção de Autenticação
+    if (typeof verificarAutenticacao === 'function') {
+        verificarAutenticacao();
+    } else {
+        const token = localStorage.getItem("token");
+        if (!token) window.location.href = "index.html";
     }
 
-    // --- FUNCIONALIDADE 2: Atualizar Painel de Avisos ---
-    const btnAtualizar = document.querySelector('.btn-primary');
-    const areaTexto = document.querySelector('textarea');
+    // 2. Configura o botão de gerar
+    const form = document.getElementById("form-relatorio");
+    const btnGerar = document.getElementById("btn-gerar-pdf");
 
-    if(btnAtualizar) {
-        btnAtualizar.addEventListener('click', function() {
-            const textoAviso = areaTexto.value;
+    if (form) {
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault(); 
 
-            if (textoAviso.trim() === "") {
-                alert("Escreva uma mensagem antes de publicar.");
-            } else {
-                alert("Aviso publicado no Portal da Transparência com sucesso!");
-                areaTexto.value = ""; // Limpa a caixa de texto
+            // Captura os dados
+            const cliente = document.getElementById("filtro-cliente").value.trim();
+            const dataInicio = document.getElementById("filtro-data-inicio").value;
+            const dataFim = document.getElementById("filtro-data-fim").value;
+            const municipio = document.getElementById("filtro-municipio").value.trim();
+            
+            // Monta o objeto de filtro
+            const filtro = {
+                municipio: municipio || null,
+                dataInicio: dataInicio || null,
+                dataFim: dataFim || null,
+                sementeId: null, 
+                agricultorId: null
+            };
+
+            // Feedback visual
+            const textoOriginal = btnGerar.innerText;
+            btnGerar.innerText = "Baixando PDF...";
+            btnGerar.disabled = true;
+            btnGerar.style.opacity = "0.7";
+
+            try {
+                const baseUrl = (typeof API_URL !== 'undefined') ? API_URL : 'http://localhost:8080/api';
+                
+                const response = await fetch(`${baseUrl}/relatorios/gerar`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    },
+                    body: JSON.stringify(filtro)
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = "relatorio_envios.pdf"; 
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+
+                    console.log("Download iniciado!");
+                } else {
+                    if (response.status === 403) {
+                        alert("Sessão expirada. Faça login novamente.");
+                        window.location.href = "login.html";
+                    } else {
+                        alert("Erro ao gerar relatório. Código: " + response.status);
+                    }
+                }
+            } catch (error) {
+                console.error("Erro técnico:", error);
+                alert("Erro de conexão com o servidor.");
             }
+
+            // Restaura o botão
+            btnGerar.innerText = textoOriginal;
+            btnGerar.disabled = false;
+            btnGerar.style.opacity = "1";
         });
     }
 });

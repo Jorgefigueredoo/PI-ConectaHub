@@ -3,105 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preparar Envio - ConectaHub</title>
+    <title>Novo Envio - ConectaHub</title>
     
     <link rel="stylesheet" href="css/envios.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .search-results {
+            position: absolute;
+            background: white;
+            width: 100%;
+            border: 1px solid #e1e5ee;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        .search-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .search-item:hover {
+            background-color: #f8f9fa;
+            color: #1a3a68;
+        }
+        .relative-container {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
     
     <div class="app-container">
-        
         <nav class="sidebar">
             <div class="sidebar-header">
-                <h1 class="sidebar-logo"><span></span>ConectaHub</h1>
+                <img src="img/logo_conectahub.png" alt="ConectaHub Logo" class="sidebar-logo" onerror="this.src='https://placehold.co/150x50?text=Logo'">
             </div>
-            
             <ul class="sidebar-nav">
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-home icon"></i> 
-                        Painel
-                    </a>
-                </li>
-                <li class="nav-item active"> 
-                    <a href="#">
-                        <i class="fas fa-truck icon"></i> 
-                        Envios
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-search icon"></i> 
-                        Buscar
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-chart-pie icon"></i> 
-                        Relatório
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-box icon"></i> 
-                        Estoque
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-cog icon"></i> 
-                        Gestão
-                    </a>
+                <li class="nav-item"><a href="painel_de_controle.html"><i class="fas fa-home icon"></i> Painel</a></li>
+                <li class="nav-item active"><a href="envios.html"><i class="fas fa-truck icon"></i> Envios</a></li>
+                <li class="nav-item"><a href="buscar.html"><i class="fas fa-search icon"></i> Buscar</a></li>
+                <li class="nav-item"><a href="relatorios.html"><i class="fas fa-chart-pie icon"></i> Relatório</a></li>
+                <li class="nav-item"><a href="estoque.html"><i class="fas fa-box icon"></i> Estoque</a></li>
+                <li class="nav-item"><a href="gestao.html"><i class="fas fa-cog icon"></i> Gestão</a></li>
+                <li class="nav-item logout-item" style="margin-top: auto;">
+                    <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt icon"></i> Sair</a>
                 </li>
             </ul>
         </nav>
         
         <main class="main-content">
-            
             <div class="form-card-white">
+                <h1 class="form-title">Preparar Novo Envio</h1>
                 
-                <h2 class="form-title">Preparar Novo Envio</h2>
-                
-                <form>
-                    <section class="form-section">
-                        <h3>1. Destinatário</h3>
-                        <div class="input-group search-group">
-                            <i class="fas fa-search search-icon"></i>
-                            <input type="text" placeholder="Buscar agricultor por nome ou envio">
+                <div class="form-section">
+                    <h3 class="form-section-title">1. Destinatário</h3>
+                    <div class="input-group relative-container">
+                        <label for="input-busca-agricultor"><i class="fas fa-search"></i> Buscar Agricultor</label>
+                        <input type="text" id="input-busca-agricultor" placeholder="Digite o nome do agricultor (min. 3 caracteres)" autocomplete="off">
+                        <div id="lista-resultados-agricultor" class="search-results"></div>
+                        <input type="hidden" id="agricultor-id-selecionado">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title">Detalhes do Lote</h3>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="select-semente">Tipo de Semente *</label>
+                            <!-- O ID ABAIXO É CRÍTICO PARA O JS FUNCIONAR -->
+                            <select id="select-semente">
+                                <option value="" disabled selected>Selecione uma semente</option>
+                            </select>
                         </div>
-                        <p class="search-result">José da Silva // CPF: 145.789.774.12 // Gravatá – PE</p>
-                    </section>
-                    
-                    <section class="form-section">
-                        <h2 class="form-title-section">Detalhes do Lote</h2>
-                        <div class="form-row">
-                            <div class="input-group">
-                                <label for="tipo-semente">Tipo de Semente</label>
-                                <select id="tipo-semente">
-                                    <option value="milho" selected>Milho</option>
-                                    <option value="soja">Soja</option>
-                                    <option value="feijao">Feijão</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label for="quantidade">Quantidade (kg)</label>
-                                <input type="number" id="quantidade" value="10">
-                            </div>
+                        <div class="input-group">
+                            <label for="input-quantidade">Quantidade (kg) *</label>
+                            <input type="number" id="input-quantidade" placeholder="Ex: 10" min="1">
                         </div>
-                    </section>
-                    
-                    <button type="submit" class="btn-submit">
-                        Gerar etiqueta e Registrar Envio
-                    </button>
-                </form>
+                    </div>
+                </div>
+
+                <button class="btn-submit" onclick="registrarEnvio()">
+                    <i class="fas fa-check-circle"></i> Gerar etiqueta e Registrar Envio
+                </button>
             </div>
-            
         </main>
     </div>
 
+    <!-- REMOVIDO: script src="js/sidebar-navigation.js" -->
+    <!-- MANTIDO: Apenas api.js e envios.js -->
+    <script src="js/api.js"></script>
+    <script src="js/envios.js"></script>
+    
+    <script>
+        function logout() {
+            if(typeof removerToken === 'function') removerToken();
+            else localStorage.removeItem("token");
+            window.location.href = "login.html"; 
+        }
+    </script>
 </body>
 </html>

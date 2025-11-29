@@ -15,51 +15,61 @@
     
     <div class="app-container">
         
+        <!-- SIDEBAR -->
         <nav class="sidebar">
             <div class="sidebar-header">
-                <img src="Logotipo para Empresa .png" alt="Logo da ConectaHub" class="sidebar-logo-img">
+                <!-- Fallback de imagem -->
+                <img src="img/logo_conectahub.png" alt="Logo da ConectaHub" class="sidebar-logo-img" onerror="this.src='https://placehold.co/150x50?text=Logo'">
             </div>
             
             <ul class="sidebar-nav">
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="painel_de_controle.html">
                         <i class="fas fa-home icon"></i> 
                         Painel
                     </a>
                 </li>
                 <li class="nav-item"> 
-                    <a href="#">
+                    <a href="envios.html">
                         <i class="fas fa-truck icon"></i> 
                         Envios
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="buscar.html">
                         <i class="fas fa-search icon"></i> 
                         Buscar
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="relatorio.html">
                         <i class="fas fa-chart-pie icon"></i> 
                         Relatório
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a href="#">
+                    <a href="estoque.html">
                         <i class="fas fa-box icon"></i> 
                         Estoque
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="gestao.html">
                         <i class="fas fa-cog icon"></i> 
                         Gestão
+                    </a>
+                </li>
+                <!-- Botão de Sair -->
+                <li class="nav-item logout-item" style="margin-top: auto;">
+                    <a href="#" id="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt icon"></i> 
+                        Sair
                     </a>
                 </li>
             </ul>
         </nav>
         
+        <!-- MAIN CONTENT -->
         <main class="main-content">
             
             <div class="stock-control-card">
@@ -70,7 +80,8 @@
                     <h3>1. Destinatário</h3>
                     <div class="search-bar-dark">
                         <i class="fas fa-search icon"></i>
-                        <input type="text" placeholder="Buscar por semente ou lote">
+                        <!-- ID adicionado para o script de busca -->
+                        <input type="text" id="input-busca" placeholder="Buscar por semente ou lote">
                     </div>
                 </section>
                 
@@ -86,30 +97,11 @@
                                 <th>Última Entrada</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <!-- ID adicionado para o Javascript preencher dinamicamente -->
+                        <tbody id="tabela-estoque-body">
+                            <!-- O JS vai limpar isso e adicionar os dados reais -->
                             <tr>
-                                <td>Milho</td>
-                                <td>1.500 kg</td>
-                                <td><span class="status status-disponivel">Disponível</span></td>
-                                <td>25/10/2025</td>
-                            </tr>
-                            <tr>
-                                <td>Soja</td>
-                                <td>800 kg</td>
-                                <td><span class="status status-disponivel">Disponível</span></td>
-                                <td>11/08/2025</td>
-                            </tr>
-                            <tr>
-                                <td>Feijão</td>
-                                <td>50 kg</td>
-                                <td><span class="status status-baixo">Estoque Baixo</span></td>
-                                <td>09/09/2025</td>
-                            </tr>
-                            <tr>
-                                <td>Melancia</td>
-                                <td>0 kg</td>
-                                <td><span class="status status-sem-estoque">Sem Estoque</span></td>
-                                <td>22/08/2025</td>
+                                <td colspan="4" style="text-align: center; padding: 20px;">Carregando estoque...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -119,6 +111,17 @@
             
         </main>
     </div>
- <script src="js/estoque.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/estoque.js"></script>
+    
+    <script>
+        function logout() {
+            localStorage.removeItem("token");
+            localStorage.removeItem("usuario");
+            window.location.href = "index.html"; 
+        }
+    </script>
 </body>
 </html>

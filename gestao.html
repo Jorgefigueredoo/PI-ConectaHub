@@ -15,56 +15,31 @@
     
     <div class="app-container">
         
+        <!-- SIDEBAR -->
         <nav class="sidebar">
             <div class="sidebar-header">
-                <img src="Logotipo para Empresa .png" alt="Logo da ConectaHub" class="sidebar-logo-img">
+                <img src="img/logo_conectahub.png" alt="ConectaHub Logo" class="sidebar-logo" onerror="this.src='https://placehold.co/150x50?text=Logo'">
             </div>
             
             <ul class="sidebar-nav">
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-home icon"></i> 
-                        Painel
-                    </a>
-                </li>
-                <li class="nav-item"> 
-                    <a href="#">
-                        <i class="fas fa-truck icon"></i> 
-                        Envios
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-search icon"></i> 
-                        Buscar
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-chart-pie icon"></i> 
-                        Relatório
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-box icon"></i> 
-                        Estoque
-                    </a>
-                </li>
-                <li class="nav-item active">
-                    <a href="#">
-                        <i class="fas fa-cog icon"></i> 
-                        Gestão
-                    </a>
+                <li class="nav-item"><a href="painel_de_controle.html"><i class="fas fa-home icon"></i> Painel</a></li>
+                <li class="nav-item"><a href="envios.html"><i class="fas fa-truck icon"></i> Envios</a></li>
+                <li class="nav-item"><a href="buscar.html"><i class="fas fa-search icon"></i> Buscar</a></li>
+                <li class="nav-item"><a href="relatorio.html"><i class="fas fa-chart-pie icon"></i> Relatório</a></li>
+                <li class="nav-item"><a href="estoque.html"><i class="fas fa-box icon"></i> Estoque</a></li>
+                <li class="nav-item active"><a href="gestao.html"><i class="fas fa-cog icon"></i> Gestão</a></li>
+                <li class="nav-item logout-item" style="margin-top: auto;">
+                    <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt icon"></i> Sair</a>
                 </li>
             </ul>
         </nav>
         
+        <!-- MAIN CONTENT -->
         <main class="main-content">
             
             <div class="management-header">
                 <h2 class="main-title">Gestão de Fornecedores</h2>
-                <button class="btn-add-new">
+                <button class="btn-add-new" id="btn-novo-fornecedor">
                     <i class="fas fa-plus icon"></i>
                     Cadastrar novo Fornecedor
                 </button>
@@ -78,56 +53,56 @@
                     <div class="header-item acoes">Ações</div>
                 </div>
                 
-                <div class="supplier-item">
-                    <div class="supplier-name">Sertão Fértil Sementes Ltda</div>
-                    <div class="supplier-dropdown">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                
-                <div class="supplier-item">
-                    <div class="supplier-name">Agrotech Grãos Brasil S.A</div>
-                    <div class="supplier-dropdown">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                
-                <div class="supplier-item">
-                    <div class="supplier-name">Cooperativa dos Agricultores</div>
-                    <div class="supplier-dropdown">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                
-                <div class="supplier-item">
-                    <div class="supplier-name">Associação dos produtores</div>
-                    <div class="supplier-dropdown">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                
-                <div class="supplier-item">
-                    <div class="supplier-name">Agrocementes</div>
-                    <div class="supplier-dropdown">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                
-                <div class="supplier-item">
-                    <div class="supplier-name">Sertão Fértil grãos</div>
-                    <div class="supplier-dropdown">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
+                <!-- LISTA DINÂMICA -->
+                <div id="lista-fornecedores">
+                    <p style="padding: 20px; text-align: center; color: #666;">Carregando...</p>
                 </div>
                 
             </div>
             
         </main>
     </div>
-</main>
+
+    <!-- === MODAL DE CADASTRO (NOVO) === -->
+    <div id="modal-fornecedor" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-titulo">Novo Fornecedor</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <input type="hidden" id="fornecedor-id"> <!-- Para edição -->
+                
+                <div class="input-group">
+                    <label for="modal-razao">Razão Social</label>
+                    <input type="text" id="modal-razao" placeholder="Ex: Agro Sementes Ltda">
+                </div>
+                
+                <div class="input-group">
+                    <label for="modal-cnpj">CNPJ</label>
+                    <input type="text" id="modal-cnpj" placeholder="Apenas números" maxlength="18">
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn-cancel">Cancelar</button>
+                <button class="btn-save" id="btn-salvar-modal">Salvar</button>
+            </div>
+        </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
     <script src="js/gestao.js"></script>
+    
+    <script>
+        function logout() {
+            if(typeof removerToken === 'function') removerToken();
+            else localStorage.removeItem("token");
+            window.location.href = "login.html"; 
+        }
+    </script>
 
 </body>
 </html>

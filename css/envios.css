@@ -6,15 +6,19 @@ body {
     color: #333;
 }
 
+* {
+    box-sizing: border-box; /* Garante que padding não aumente o tamanho dos elementos */
+}
+
 .app-container {
     display: flex;
     min-height: 100vh;
 }
 
-/* --- 2. Barra Lateral (Sidebar - ATUALIZADA) --- */
+/* --- 2. Barra Lateral (Sidebar) --- */
 .sidebar {
     width: 260px;
-    background-color: #1a3a68; 
+    background-color: #0e244b; /* Azul escuro do tema */
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -26,64 +30,62 @@ body {
     text-align: center; 
 }
 
-/* Logo */
 .sidebar-logo {
     max-width: 100%;
     height: auto;
-    /* Caso use texto em vez de imagem, mantenha as regras abaixo */
-    font-size: 24px;
-    font-weight: 600;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-/* Container dos itens do menu */
-.sidebar-menu {
+/* Navegação */
+.sidebar-nav {
+    list-style: none; /* Remove os pontos (bullets) da lista */
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Espaço entre os botões */
-    flex: 1;
+    gap: 8px;
 }
 
-/* Estilo do Botão do Menu (.menu-item) */
-.menu-item {
+/* Itens do Menu */
+.nav-item a {
     display: flex;
     align-items: center;
-    padding: 14px 18px; /* Espaçamento interno */
+    padding: 14px 18px;
     border-radius: 10px;
-    text-decoration: none;
+    text-decoration: none; /* Remove o sublinhado dos links */
     font-weight: 500;
     font-size: 16px;
-    color: #a9b4c9; /* Cor do texto inativo */
+    color: #a9b4c9; /* Cor cinza claro para itens inativos */
     transition: all 0.3s ease;
 }
 
-.menu-item .icon {
+.nav-item .icon {
     font-size: 18px; 
     width: 24px; 
     text-align: center; 
     margin-right: 12px;
-    opacity: 0.8; 
 }
 
-/* Efeito ao passar o mouse */
-.menu-item:hover {
+/* Hover */
+.nav-item a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
 }
 
-/* --- ESTADO ATIVO (Quando a página está aberta) --- */
-.menu-item.active {
-    background-color: #3a5a8a; /* Azul mais claro */
+/* Item Ativo (Página Atual) */
+.nav-item.active a {
+    background-color: #3a5a8a; /* Azul destaque */
     color: #ffffff;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.menu-item.active .icon {
-    opacity: 1.0;
+/* Botão de Sair */
+.logout-item a {
+    color: #ff6b6b; /* Vermelho suave para sair */
+}
+.logout-item a:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+    color: #ff8787;
 }
 
 /* --- 3. Conteúdo Principal --- */
@@ -92,19 +94,16 @@ body {
     padding: 40px 50px;
     overflow-y: auto; 
     background-color: #f0f2f5; 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
 }
 
-/* --- 4. Cartão do Formulário (Estilo Branco) --- */
+/* --- 4. Formulário de Envios --- */
 .form-card-white {
     background-color: #ffffff;
     border-radius: 20px;
     padding: 40px 50px;
     width: 100%;
     max-width: 900px; 
-    margin: 20px auto; 
+    margin: 0 auto; /* Centraliza o card */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
@@ -112,103 +111,78 @@ body {
     font-size: 28px;
     font-weight: 700;
     color: #222;
-    margin: 0 0 30px 0;
+    margin: 0 0 10px 0;
 }
 
-.form-title-section {
+.form-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.form-section-title {
     font-size: 18px;
     font-weight: 600;
-    color: #222;
-    margin-bottom: 15px;
+    color: #1a3a68;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 10px;
+    margin-top: 10px;
 }
 
-.form-section {
-    margin-bottom: 35px;
-}
-
+/* Grid do Formulário */
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas */
+    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
     gap: 25px;
+    margin-bottom: 20px;
+}
+
+/* Caso precise de linha inteira */
+.form-row.full-width {
+    grid-template-columns: 1fr;
 }
 
 .input-group {
-    width: 100%;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .input-group label {
-    display: block;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
-    color: #333;
+    color: #444;
     margin-bottom: 8px;
 }
 
-/* Inputs e Selects */
+/* Estilo dos Inputs */
 .input-group input[type="text"],
 .input-group input[type="number"],
+.input-group input[type="date"],
 .input-group select {
     width: 100%;
-    padding: 14px 18px;
-    font-size: 16px;
+    padding: 12px 16px;
+    font-size: 15px;
     font-family: 'Poppins', Arial, sans-serif;
-    border: none; 
+    border: 1px solid #e1e5ee; 
     border-radius: 10px;
-    background-color: #f0f2f5; /* Fundo cinza claro nos campos */
+    background-color: #f8f9fa;
     color: #333;
-    box-sizing: border-box; 
     outline: none;
-    transition: box-shadow 0.2s;
+    transition: all 0.2s;
 }
 
 .input-group input:focus,
 .input-group select:focus {
-    box-shadow: 0 0 0 2px #3a5a8a; /* Foco azul */
+    border-color: #3a5a8a;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(58, 90, 138, 0.1);
 }
 
-/* Estilo personalizado para o Select */
-.input-group select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%207.5l5%205%205-5%22%20stroke%3D%22%23555%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 16px;
-    cursor: pointer;
-}
-
-/* Campo de busca com ícone interno */
-.search-group {
-    position: relative;
-}
-
-.search-group .search-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%); /* Centraliza verticalmente */
-    font-size: 18px;
-    color: #777;
-    pointer-events: none; /* Permite clicar através do ícone */
-}
-
-.search-group input[type="text"] {
-    padding-left: 50px; 
-}
-
-.search-result {
-    font-size: 13px;
-    color: #666;
-    margin-top: 8px;
-    margin-left: 5px;
-}
-
-/* Botão de Registrar (Verde/Azul) */
+/* Botão de Ação */
 .btn-submit {
     width: 100%;
-    padding: 18px;
+    padding: 16px;
     font-size: 16px;
     font-weight: 600;
     border: none;
@@ -216,14 +190,14 @@ body {
     cursor: pointer;
     background-color: #1a3a68;
     color: white;
-    transition: background-color 0.3s ease, transform 0.1s;
-    margin-top: 10px; 
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .btn-submit:hover {
-    background-color: #2c4c7c;
-}
-
-.btn-submit:active {
-    transform: scale(0.98);
+    background-color: #254e8a;
 }

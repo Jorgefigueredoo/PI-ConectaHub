@@ -7,17 +7,21 @@
     
     <link rel="stylesheet" href="css/painel_de_controle.css">
     
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     
     <div class="app-container">
         
+        <!-- SIDEBAR -->
         <nav class="sidebar">
             <div class="sidebar-header">
-                <img src="Logotipo para Empresa .png" alt="ConectaHub Logo" class="sidebar-logo">
+                <!-- Ajustei o nome do arquivo para evitar espaços -->
+                <img src="img/logo_conectahub.png" alt="ConectaHub Logo" class="sidebar-logo" onerror="this.src='https://placehold.co/150x50?text=Logo'">
             </div>
             
             <ul class="sidebar-nav">
@@ -34,40 +38,47 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="buscar.html">
                         <i class="fas fa-search icon"></i> 
                         Buscar
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="relatorio.html">
                         <i class="fas fa-chart-pie icon"></i> 
                         Relatório
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="estoque.html">
                         <i class="fas fa-box icon"></i> 
                         Estoque
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="gestao.html">
                         <i class="fas fa-cog icon"></i> 
                         Gestão
+                    </a>
+                </li>
+                <!-- Botão de Sair adicionado -->
+                <li class="nav-item logout-item" style="margin-top: auto;">
+                    <a href="#" id="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt icon"></i> 
+                        Sair
                     </a>
                 </li>
             </ul>
         </nav>
         
+        <!-- MAIN CONTENT -->
         <main class="main-content">
             
             <header class="main-header">
                 <div class="header-title">
-                    <h1>
-                        Painel de controle
-                    </h1>
-                    <p>Bem vindo, Dr Roberto</p>
+                    <h1>Painel de controle</h1>
+                    <!-- ID adicionado para trocar o nome via JS -->
+                    <p id="usuario-saudacao">Bem vindo, Carregando...</p>
                 </div>
                 <button class="notification-btn">
                     <i class="fas fa-bell"></i>
@@ -77,25 +88,28 @@
             <section class="stats-cards">
                 <div class="stat-card">
                     <span>Em Trânsito</span>
-                    <h2>35</h2>
+                    <!-- ID adicionado para o Back-end preencher -->
+                    <h2 id="stat-em-transito">--</h2>
                 </div>
                 <div class="stat-card">
                     <span>Entregues hoje</span>
-                    <h2>120</h2>
+                    <!-- ID adicionado para o Back-end preencher -->
+                    <h2 id="stat-entregues">--</h2>
                 </div>
                 <div class="stat-card">
                     <span>Confirmados</span>
-                    <h2>92%</h2>
+                    <!-- ID adicionado para o Back-end preencher -->
+                    <h2 id="stat-confirmados">--%</h2>
                 </div>
             </section>
             
             <section class="main-actions">
-                <button class="btn btn-primary btn-novo-envio">
+                <button class="btn btn-primary" id="btn-novo-envio" onclick="window.location.href='envios.html'">
                     <i class="fas fa-plus icon"></i>
                     Preparar novo envio
                 </button>
                 
-                <button class="btn btn-primary btn-buscar-lote">
+                <button class="btn btn-primary" id="btn-buscar-lote" onclick="window.location.href='buscar.html'">
                     <i class="fas fa-search icon"></i>
                     Buscar lote
                 </button>
@@ -103,18 +117,28 @@
             
             <section class="recent-activity">
                 <h2>Atividade recente</h2>
-                <div class="activity-list">
-                    <div class="activity-item">
-                        Lote 7891 confirmado por José da Silva - Gravatá
-                    </div>
-                    <div class="activity-item">
-                        Novo envio criado Surubim 8790
-                    </div>
+                <!-- ID adicionado para listar itens do banco -->
+                <div class="activity-list" id="lista-atividades">
+                    <p style="color: #666; font-size: 0.9rem;">Carregando atividades...</p>
+                    <!-- O Javascript vai injetar os itens aqui -->
                 </div>
             </section>
             
         </main>
     </div>
 
-    </body>
+    <!-- Scripts -->
+    <!-- api.js deve vir primeiro para configurar a URL base -->
+    <script src="js/api.js"></script> 
+    <script src="js/painel_de_controle.js"></script>
+    
+    <script>
+        // Função simples de Logout para limpar o token
+        function logout() {
+            localStorage.removeItem("token");
+            localStorage.removeItem("usuario");
+            window.location.href = "login.html"; // Volta para o login
+        }
+    </script>
+</body>
 </html>

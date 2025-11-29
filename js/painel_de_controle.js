@@ -1,70 +1,181 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", () => {
+    verificarAutenticacao();
     
-    // --- 1. SELEÇÃO DOS ELEMENTOS ---
-    // Aqui pegamos os botões grandes da tela
-    // Nota: Você precisará adicionar essas classes ou IDs no seu HTML (veja o Passo 2)
-    const btnNovoEnvio = document.querySelector('.btn-novo-envio');
-    const btnBuscarLote = document.querySelector('.btn-buscar-lote');
-    const linksSidebar = document.querySelectorAll('.sidebar-menu a'); // Ajuste conforme sua classe da sidebar
-
-    // --- 2. AÇÕES DOS BOTÕES ---
-
-    // Botão "Preparar novo envio"
-    if (btnNovoEnvio) {
-        btnNovoEnvio.addEventListener('click', function() {
-            // Redireciona para a página de envios
-            window.location.href = "envios.html";
-        });
-    }
-
-    // Botão "Buscar lote" (Simulação)
-    if (btnBuscarLote) {
-        btnBuscarLote.addEventListener('click', function() {
-            alert("Abrindo busca de lotes...");
-            // Futuramente, aqui você abriria um modal ou iria para outra tela
-        });
-    }
-
-    // --- 3. INTERATIVIDADE DA SIDEBAR (Menu Lateral) ---
-    // Faz o link ficar "ativo" quando clicado (visual apenas)
-    linksSidebar.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Remove a classe 'active' de todos
-            linksSidebar.forEach(l => l.classList.remove('active'));
-            // Adiciona no que foi clicado
-            this.classList.add('active');
-        });
-    });
-
-    // --- 4. SAUDAÇÃO DINÂMICA (Bônus) ---
-    // Altera o texto de boas-vindas baseado na hora do dia
-    const elementoSaudacao = document.querySelector('h2, .welcome-text'); // Tenta achar onde está o texto "Bem vindo"
+    // Configurações da interface
+    configurarSaudacao();
+    configurarSidebar();
+    configurarBotoes();
     
-    if (elementoSaudacao && elementoSaudacao.innerText.includes("Bem vindo")) {
-        const hora = new Date().getHours();
-        let saudacao = "Bem vindo";
+    // Busca dados do Backend
+    carregarDashboard();
+});
 
-        if (hora < 12) {
-            saudacao = "Bom dia";
-        } else if (hora < 18) {
-            saudacao = "Boa tarde";
+// --- AUTENTICAÇÃO ---
+function verificarAutenticacao() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = "index.html";
+    }
+}
+
+// --- DADOS DO DASHBOARD (BACKEND) ---
+async function carregarDashboard() {
+    try {
+        // Chama o endpoint que criamos no Java
+        const response = await fetch(`${API_URL}/dashboard/resumo`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        if (response.ok) {
+            const dados = await response.json();
+            
+            // 1. Atualiza os Cards (Números)
+            atualizarCard("stat-em-transito", dados.emTransito);
+            atualizarCard("stat-entregues", dados.entreguesHoje);
+            atualizarCard("stat-confirmados", dados.taxaConfirmacao);
+
+            // 2. Atualiza a Lista de Atividades
+            atualizarListaAtividades(dados.atividades);
         } else {
-            saudacao = "Boa noite";
+            console.error("Erro ao carregar dashboard:", response.status);
         }
-        
-        // Mantém o nome do usuário, só troca o começo
-        elementoSaudacao.innerText = elementoSaudacao.innerText.replace("Bem vindo", saudacao);
+    } catch (error) {
+        console.error("Erro de conexão ao carregar dashboard:", error);
+    }
+}
+
+function atualizarCard(elementId, valor) {
+    const elemento = document.getElementById(elementId);
+    if (elemento) {
+        elemento.innerText = valor;
+        // Pequena animação de opacidade
+        elemento.style.transition = "opacity 0.5s";
+        elemento.style.opacity = 0;
+        setTimeout(() => elemento.style.opacity = 1, 100);
+    }
+}
+
+function atualizarListaAtividades(atividades) {
+    const lista = document.getElementById("lista-atividades");
+    if (!lista) return;
+
+    lista.innerHTML = ""; // Limpa o "Carregando..."
+
+    if (!atividades || atividades.length === 0) {
+        lista.innerHTML = "<p style='color: #888; padding: 10px;'>Nenhuma atividade recente.</p>";
+        return;
     }
 
-    // --- 5. LOGOUT (Se tiver botão de sair) ---
-    // Se você tiver um botão de sair na sidebar
-    const btnLogout = document.getElementById('btn-logout');
-    if (btnLogout) {
-        btnLogout.addEventListener('click', function(e) {
-            e.preventDefault();
-            if(confirm("Deseja realmente sair?")) {
-                window.location.href = "login.html";
+    atividades.forEach(atividade => {
+        const item = document.createElement("div");
+        item.className = "activity-item";
+        
+        // Monta o HTML do item de atividade
+        item.innerHTML = `
+            <div class="activity-content">
+                <span class="activity-text">${atividade.descricao}</span>
+                <span class="activity-date" style="font-size: 0.85em; color: #666; display: block; margin-top: 4px;">
+                    <i class="far fa-clock"></i> ${atividade.dataHora}
+                </span>
+            </div>
+        `;
+        
+        lista.appendChild(item);
+    });
+}
+
+// --- INTERFACE E SAUDAÇÃO ---
+function configurarSaudacao() {
+    const elementoSaudacao = document.getElementById("usuario-saudacao") || document.querySelector('.header-title p');
+    
+    if (elementoSaudacao) {
+        // 1. Define Bom dia/Boa tarde/Boa noite
+        const hora = new Date().getHours();
+        let saudacaoTempo = "Bem vindo";
+        if (hora < 12) saudacaoTempo = "Bom dia";
+        else if (hora < 18) saudacaoTempo = "Boa tarde";
+        else saudacaoTempo = "Boa noite";
+
+        // 2. Pega o nome do usuário salvo no login
+        const usuarioEmail = localStorage.getItem("usuario") || "Doutor";
+        // Pega apenas o primeiro nome (antes do espaço ou do @)
+        let nomeExibicao = usuarioEmail.includes("@") ? usuarioEmail.split("@")[0] : usuarioEmail;
+        nomeExibicao = nomeExibicao.charAt(0).toUpperCase() + nomeExibicao.slice(1);
+
+        // 3. Atualiza o texto
+        elementoSaudacao.textContent = `${saudacaoTempo}, ${nomeExibicao}`;
+    }
+}
+
+function configurarSidebar() {
+    const paginaAtual = window.location.pathname.split("/").pop();
+    const linksSidebar = document.querySelectorAll('.sidebar-nav a');
+
+    linksSidebar.forEach(link => {
+        const href = link.getAttribute('href');
+        const item = link.closest('.nav-item');
+        
+        // Remove active de todos e adiciona no atual
+        if (item) item.classList.remove('active');
+        
+        if (href === paginaAtual && item) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// --- BOTÕES E AÇÕES ---
+function configurarBotoes() {
+    const btnNovoEnvio = document.querySelector('.btn-novo-envio') || document.getElementById('btn-novo-envio');
+    const btnBuscarLote = document.querySelector('.btn-buscar-lote') || document.getElementById('btn-buscar-lote');
+
+    if (btnNovoEnvio) {
+        btnNovoEnvio.addEventListener('click', () => {
+            window.location.href = "envios.html"; // Redireciona para a tela de criar envio
+        });
+    }
+
+    if (btnBuscarLote) {
+        btnBuscarLote.addEventListener('click', async () => {
+            const codigoLote = prompt("Digite o código do lote que deseja buscar (Ex: LOTE-123456):");
+            if (codigoLote && codigoLote.trim() !== "") {
+                await buscarEExibirLote(codigoLote.trim());
             }
         });
     }
-});
+}
+
+// --- BUSCA DE LOTE (Função Auxiliar) ---
+async function buscarEExibirLote(codigoLote) {
+    try {
+        const response = await fetch(`${API_URL}/envios/buscar/${codigoLote}`, {
+            headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const envio = data.envio;
+            const historico = data.historico;
+
+            let mensagem = `📦 DETALHES DO LOTE: ${envio.codigoLote}\n\n`;
+            mensagem += `Agricultor: ${envio.agricultor.nome || envio.agricultor.nomeRazaoSocial}\n`;
+            mensagem += `Semente: ${envio.semente.tipoSemente}\n`;
+            mensagem += `Quantidade: ${envio.quantidadeEnviadaKg} kg\n`;
+            mensagem += `Status: ${envio.status}\n`;
+            
+            if (historico && historico.length > 0) {
+                mensagem += `\n📋 ÚLTIMO STATUS:\n${historico[historico.length - 1].descricao}`;
+            }
+
+            alert(mensagem);
+        } else {
+            alert("❌ Lote não encontrado.");
+        }
+    } catch (error) {
+        console.error("Erro ao buscar lote:", error);
+        alert("Erro ao comunicar com o servidor.");
+    }
+}

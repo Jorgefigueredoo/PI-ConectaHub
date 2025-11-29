@@ -1,7 +1,7 @@
 // ========================================
 // CONFIGURAÇÃO BASE DA API
 // ========================================
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_URL = 'http://localhost:8080/api'; 
 
 // --- GERENCIAMENTO DO TOKEN (JWT) ---
 
@@ -15,6 +15,7 @@ function salvarToken(token) {
 
 function removerToken() {
     localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
 }
 
 function estaLogado() {
@@ -22,134 +23,133 @@ function estaLogado() {
 }
 
 // ========================================
-// 1. FUNÇÕES DE AUTENTICAÇÃO (LOGIN E CADASTRO)
+// 1. FUNÇÕES DE AUTENTICAÇÃO
 // ========================================
 
-/**
- * Faz o Login no sistema
- * ⚠️ ATENÇÃO: No Java, seu DTO pede 'email' e 'senha'
- */
 async function fazerLogin(email, senha) {
-    console.log("Tentando logar com:", email);
-
     try {
-        const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // Envia exatamente os nomes que o LoginRequestDTO espera
-            body: JSON.stringify({ 
-                email: email, 
-                senha: senha 
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, senha: senha })
         });
 
         if (response.ok) {
             const data = await response.json();
             salvarToken(data.token);
+            localStorage.setItem('usuario', email);
             return { success: true, token: data.token };
         } else {
-            return { success: false, error: 'Email ou senha incorretos' };
+            return { success: false, error: 'Dados incorretos' };
         }
     } catch (error) {
-        console.error('Erro no login:', error);
-        return { success: false, error: 'Erro de conexão com o servidor' };
-    }
-}
-
-/**
- * Faz o Cadastro de novo usuário
- * ⚠️ ATENÇÃO: No Java, o RegisterDTO costuma esperar 'login' e 'password'
- */
-async function fazerCadastro(nome, email, senha) {
-    console.log("Tentando cadastrar:", email);
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/auth/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // Mapeamos os dados do formulário para o padrão do Spring Security
-            body: JSON.stringify({ 
-                name: nome,       // Se seu DTO tiver campo nome
-                login: email,     // O Spring Security usa 'login' como usuário
-                password: senha,  // O Spring Security usa 'password' como senha
-                role: 'USER'      // Define permissão padrão
-            })
-        });
-
-        if (response.ok) {
-            return { success: true };
-        } else {
-            // Tenta ler a mensagem de erro que o Java mandou (ex: "Email em uso")
-            const textoErro = await response.text();
-            return { success: false, error: textoErro || 'Erro ao realizar cadastro.' };
-        }
-    } catch (error) {
-        console.error('Erro no cadastro:', error);
-        return { success: false, error: 'Erro de conexão com o servidor' };
+        return { success: false, error: 'Erro de conexão' };
     }
 }
 
 // ========================================
-// 2. FUNÇÕES PROTEGIDAS (PRECISAM DE TOKEN)
+// 2. FUNÇÕES DE FORNECEDORES (CRUD COMPLETO)
 // ========================================
 
-/**
- * Busca agricultores (Exemplo de rota protegida)
- */
-async function buscarAgricultores(nome) {
+// Lista todos os fornecedores
+async function listarFornecedores() {
     try {
-        const response = await fetch(`${API_BASE_URL}/agricultores/buscar?nome=${encodeURIComponent(nome)}`, {
-            headers: {
-                'Authorization': `Bearer ${getToken()}` // Envia o token no cabeçalho
-            }
-        });
-
-        if (response.ok) {
-            return await response.json();
-        } else if (response.status === 403) {
-            console.warn("Token expirado ou inválido.");
-            // Opcional: removerToken(); window.location.href = 'login.html';
-            return [];
-        } else {
-            return [];
-        }
-    } catch (error) {
-        console.error('Erro ao buscar agricultores:', error);
-        return [];
-    }
-}
-
-/**
- * Lista Estoque (Exemplo)
- */
-async function listarEstoque() {
-    try {
-        const response = await fetch(`${API_BASE_URL}/sementes`, {
+        const response = await fetch(`${API_URL}/fornecedores`, {
             headers: { 'Authorization': `Bearer ${getToken()}` }
         });
-
         if (response.ok) return await response.json();
         return [];
     } catch (error) {
+        console.error("Erro ao listar:", error);
         return [];
     }
 }
 
+// Cria um novo fornecedor (A função que estava faltando!)
+async function criarFornecedor(razaoSocial, cnpj) {
+    try {
+        const response = await fetch(`${API_URL}/fornecedores`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            },
+            body: JSON.stringify({ razaoSocial, cnpj })
+        });
+
+        if (response.ok) return { success: true, data: await response.json() };
+        
+        const errorText = await response.text(); 
+        return { success: false, error: errorText || "Erro ao criar" };
+    } catch (error) {
+        return { success: false, error: "Erro de conexão" };
+    }
+}
+
+// Atualiza um fornecedor
+async function atualizarFornecedor(id, razaoSocial, cnpj) {
+    try {
+        const response = await fetch(`${API_URL}/fornecedores/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            },
+            body: JSON.stringify({ razaoSocial, cnpj })
+        });
+
+        if (response.ok) return { success: true };
+        return { success: false, error: "Erro ao atualizar" };
+    } catch (error) {
+        return { success: false, error: "Erro de conexão" };
+    }
+}
+
+// Deleta um fornecedor
+async function deletarFornecedor(id) {
+    try {
+        const response = await fetch(`${API_URL}/fornecedores/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${getToken()}` }
+        });
+
+        if (response.ok) return { success: true };
+        return { success: false, error: "Erro ao excluir" };
+    } catch (error) {
+        return { success: false, error: "Erro de conexão" };
+    }
+}
+
 // ========================================
-// 3. UTILITÁRIOS DE NAVEGAÇÃO
+// 3. OUTRAS FUNÇÕES (Estoque, Envios...)
+// ========================================
+
+async function listarEstoque() {
+    try {
+        const response = await fetch(`${API_URL}/sementes`, {
+            headers: { 'Authorization': `Bearer ${getToken()}` }
+        });
+        if (response.ok) return await response.json();
+        return [];
+    } catch (error) { return []; }
+}
+
+async function buscarSementes(termo) {
+    try {
+        const response = await fetch(`${API_URL}/sementes/buscar?nome=${termo}`, {
+            headers: { 'Authorization': `Bearer ${getToken()}` }
+        });
+        if (response.ok) return await response.json();
+        return [];
+    } catch (error) { return []; }
+}
+
+// ========================================
+// 4. UTILITÁRIOS
 // ========================================
 
 function verificarAutenticacao() {
     if (!estaLogado()) {
-        window.location.href = 'login.html';
+        window.location.href = 'index.html'; 
     }
-}
-
-function fazerLogout() {
-    removerToken();
-    window.location.href = 'login.html';
 }
