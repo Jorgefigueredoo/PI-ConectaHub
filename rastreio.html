@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreio - ConectaHub</title>
+    
+    <!-- CSS Específico da página -->
+    <link rel="stylesheet" href="css/rastreio.css">
+    
+    <!-- CSS Global da Sidebar (Para garantir o padrão) -->
+    <link rel="stylesheet" href="css/sidebar.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="app-container">
+        
+        <!-- SIDEBAR -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="logo_conectahub_branco.png" alt="ConectaHub" class="sidebar-logo" 
+                     onerror="this.src='https://placehold.co/180x60/1a3a68/FFF?text=ConectaHub'">
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li class="nav-item">
+                    <a href="painel_de_controle.html">
+                        <i class="fas fa-home icon"></i> 
+                        Painel
+                    </a>
+                </li>
+                <li class="nav-item"> 
+                    <a href="envios.html">
+                        <i class="fas fa-truck icon"></i> 
+                        Envios
+                    </a>
+                </li>
+                <!-- ITEM ATIVO: RASTREIO -->
+                <li class="nav-item active">
+                    <a href="rastreio.html"> <!-- Nome do arquivo atual -->
+                        <i class="fas fa-search icon"></i> 
+                        Rastreio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="relatorio.html">
+                        <i class="fas fa-chart-pie icon"></i> 
+                        Relatório
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="estoque.html">
+                        <i class="fas fa-box icon"></i> 
+                        Estoque
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestao.html">
+                        <i class="fas fa-cog icon"></i> 
+                        Gestão
+                    </a>
+                </li>
+                <!-- Botão de Sair -->
+                <li class="nav-item logout-item" style="margin-top: auto;">
+                    <a href="#" onclick="logout()">
+                        <i class="fas fa-sign-out-alt icon"></i> 
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+            
+            <div class="tracking-card">
+                <h1 class="card-title">Rastrear Lote</h1>
+                
+                <!-- BARRA DE BUSCA -->
+                <div class="search-section">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="input-codigo-lote" placeholder="Digite o código do lote (Ex: LOTE-123456)">
+                        <button id="btn-rastrear">Buscar</button>
+                    </div>
+                </div>
+
+                <!-- RESULTADO (INICIALMENTE OCULTO) -->
+                <div id="resultado-rastreio" class="tracking-result" style="display: none;">
+                    
+                    <!-- Cabeçalho do Lote -->
+                    <div class="shipment-header">
+                        <div class="shipment-info">
+                            <h2 id="lbl-codigo">Lote #7891</h2>
+                            <span id="lbl-status-badge" class="status-badge status-transito">Em Trânsito</span>
+                        </div>
+                        <div class="shipment-details">
+                            <p><strong>Destinatário:</strong> <span id="lbl-agricultor">Carregando...</span></p>
+                            <p><strong>Produto:</strong> <span id="lbl-produto">Carregando...</span></p>
+                            <p><strong>Quantidade:</strong> <span id="lbl-quantidade">-- kg</span></p>
+                        </div>
+                    </div>
+
+                    <!-- LINHA DO TEMPO (TIMELINE) -->
+                    <div class="timeline-container">
+                        <ul class="timeline" id="lista-historico">
+                            <!-- O JS vai preencher isso -->
+                            <!-- Exemplo estático:
+                            <li class="timeline-item active">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h3>Objeto em trânsito</h3>
+                                    <p>Saiu para entrega em Gravatá-PE</p>
+                                    <span class="time">Hoje, 14:30</span>
+                                </div>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+
+                </div>
+                
+                <!-- MENSAGEM DE ERRO (OCULTA) -->
+                <div id="msg-erro" class="error-message" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="texto-erro">Lote não encontrado. Verifique o código.</span>
+                </div>
+
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/rastreio.js"></script>
+    
+    <script>
+        function logout() {
+            localStorage.removeItem("token");
+            localStorage.removeItem("usuario");
+            window.location.href = "login.html"; 
+        }
+    </script>
+</body>
+</html>
