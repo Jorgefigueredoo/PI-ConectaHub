@@ -139,14 +139,13 @@ function configurarBotoes() {
     }
 
     if (btnBuscarLote) {
-        btnBuscarLote.addEventListener('click', async () => {
-            const codigoLote = prompt("Digite o código do lote que deseja buscar (Ex: LOTE-123456):");
-            if (codigoLote && codigoLote.trim() !== "") {
-                await buscarEExibirLote(codigoLote.trim());
-            }
-        });
+    btnBuscarLote.addEventListener('click', () => {
+        window.location.href = "rastreio.html"; // Redireciona para a tela de rastreio
+    });
     }
+
 }
+
 
 // --- BUSCA DE LOTE (Função Auxiliar) ---
 async function buscarEExibirLote(codigoLote) {
